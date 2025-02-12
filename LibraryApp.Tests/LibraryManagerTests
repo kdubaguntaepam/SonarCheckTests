@@ -1,0 +1,48 @@
+using Xunit;
+using LibraryApp;
+
+namespace LibraryApp.Tests
+{
+    public class LibraryManagerTests
+    {
+        private readonly LibraryManager _libraryManager = new LibraryManager();
+
+        [Fact]
+        public void AddBook_ReturnsTrue_WhenNewBookAdded()
+        {
+            var book = new Book("Sample Book Title", "Sample Author");
+            var result = _libraryManager.AddBook(book);
+            Assert.True(result);
+        }
+        [Fact]
+public void RemoveBook_ReturnsTrue_WhenExistingBookRemoved()
+{
+    var book = new Book("Sample Book Title", "Sample Author");
+    _libraryManager.AddBook(book);
+    var result = _libraryManager.RemoveBook(book);
+    Assert.True(result);
+}
+[Fact]
+public void AddBook_ReturnsFalse_WhenAddingNullBook()
+{
+    Book nullBook = null;
+    var result = _libraryManager.AddBook(nullBook);
+    Assert.False(result);
+}
+[Fact]
+public void FindBook_ReturnsBook_WhenBookExists()
+{
+    var book = new Book("Existing Book Title", "Existing Author");
+    _libraryManager.AddBook(book);
+    var foundBook = _libraryManager.FindBook("Existing Book Title");
+    Assert.Equal(book, foundBook);
+}
+[Fact]
+public void FindBook_ReturnsNull_WhenBookDoesNotExist()
+{
+    var result = _libraryManager.FindBook("Nonexistent Book Title");
+    Assert.Null(result);
+}
+// Add additional tests following this pattern
+    }
+}
